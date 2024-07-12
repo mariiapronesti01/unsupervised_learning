@@ -194,7 +194,7 @@ def adjust_points(data, dpres, curr_idx, eta, adj_data, neighbors, colinear, dis
         return s, data
 
 
-def plot(data, epoch, plot_dim, color):
+def plot(data, epoch, plot_dim, color, c_map =plt.cm.viridis):
     """
     Plot the data in the specified directory.
 
@@ -206,18 +206,18 @@ def plot(data, epoch, plot_dim, color):
     """
 
     # Create the directory if it does not exist
-    directory = f's_data_{data.shape[0]}points_{plot_dim}d'
+    directory = f'digits_{data.shape[0]}points_{plot_dim}d'
     if not os.path.exists(directory):
         os.makedirs(directory)
 
     if plot_dim == 2:
       fig = plt.figure()
       ax = fig.add_subplot(111)
-      ax.scatter(data[:,0], data[:,1], c=color, cmap=plt.cm.viridis)
+      ax.scatter(data[:,0], data[:,1], c=color, cmap=c_map)
     else:
       fig = plt.figure()
       ax = fig.add_subplot(111, projection='3d')
-      ax.scatter(data[:,0], data[:,1],data[:,2], c=color, cmap=plt.cm.viridis)
+      ax.scatter(data[:,0], data[:,1],data[:,2], c=color, cmap=c_map)
 
     # Save the plot in the specified directory
     file_path = os.path.join(directory, f'epoch_{epoch}_plot.png')

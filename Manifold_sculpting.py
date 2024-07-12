@@ -2,10 +2,11 @@ import numpy as np
 from collections import deque
 import copy
 import os
+import matplotlib.pyplot as plt
 
 from utils import compute_original_relationships, get_avg_dist, PCA_rotation, compute_error, adjust_points, plot
 
-def Manifold_Sculpting(data, k=12, n_components=2, n_iter=800, sigma=0.9, th=0.0001, align=True, verbose=True, color=None, dim=2):
+def Manifold_Sculpting(data, k=12, n_components=2, n_iter=800, sigma=0.9, th=0.0001, align=True, verbose=True, color=None, dim=2, c_map=plt.cm.viridis):
     '''
     Manifold Sculpting algorithm for dimensionality reduction.
 
@@ -102,7 +103,7 @@ def Manifold_Sculpting(data, k=12, n_components=2, n_iter=800, sigma=0.9, th=0.0
 
         if (iter % 10 == 0 and iter != 0 and verbose):
             print(f"Iteration: {iter}, change: {change}")
-            plot(x_pca, iter, dim, color)
+            plot(x_pca, iter, dim, color, c_map)
 
             # save checkpoint
             os.makedirs(f'checkpoints_{x_pca.shape[0]}', exist_ok=True)
